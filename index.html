@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Good morning, Alaina.</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#f5f3ee;
+  --surface:#ffffff;
+  --surface2:#eeebe4;
+  --surface3:#e4e0d8;
+  --text:#1c1a16;
+  --text2:#7a7060;
+  --text3:#a89f90;
+  --accent:#c07a3a;
+  --accent2:#4a8c60;
+  --gold:#b8860b;
+  --border:rgba(0,0,0,0.08);
+  --border2:rgba(0,0,0,0.15);
+  --r:12px;
+  --rlg:18px;
+}
+html,body{min-height:100vh;background:var(--bg);color:var(--text);font-family:'Jost',sans-serif;}
+body::before{
+  content:'';position:fixed;inset:0;
+  background:radial-gradient(ellipse at 20% 50%, rgba(192,122,58,0.05) 0%, transparent 60%),
+             radial-gradient(ellipse at 80% 20%, rgba(74,140,96,0.05) 0%, transparent 50%);
+  pointer-events:none;z-index:0;
+}
+.app{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:2rem 1.5rem;}
+
+/* HEADER */
+.header{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:start;margin-bottom:2rem;}
+.time-display{font-family:'Playfair Display',serif;font-size:clamp(52px,8vw,88px);line-height:1;color:var(--text);letter-spacing:-2px;margin-bottom:0.25rem;}
+.time-display span{color:var(--accent);}
+.date-display{font-size:14px;color:var(--text2);font-weight:300;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.5rem;}
+.greeting-text{font-family:'Playfair Display',serif;font-size:20px;font-style:italic;color:var(--text2);}
+.weather-block{text-align:right;min-width:120px;}
+.weather-temp{font-family:'Playfair Display',serif;font-size:42px;color:var(--text);line-height:1;}
+.weather-desc{font-size:12px;color:var(--text2);margin-top:4px;letter-spacing:0.05em;text-transform:uppercase;}
+.weather-loc{font-size:11px;color:var(--text3);margin-top:2px;}
+
+/* GRIDS */
+.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+
+/* CARDS */
+.card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rlg);padding:1.25rem;position:relative;overflow:hidden;}
+.card-label{font-size:10px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;}
+.card-accent-line{position:absolute;top:0;left:0;right:0;height:2px;}
+.line-orange{background:linear-gradient(90deg,var(--accent),transparent);}
+.line-green{background:linear-gradient(90deg,var(--accent2),transparent);}
+.line-gold{background:linear-gradient(90deg,var(--gold),transparent);}
+
+/* LINCOLN */
+.lincoln-now{font-family:'Playfair Display',serif;font-size:22px;color:var(--accent);margin-bottom:4px;line-height:1.3;}
+.lincoln-next{font-size:13px;color:var(--text3);}
+.lincoln-time{font-size:11px;color:var(--text2);margin-bottom:6px;}
+.sched-strip{display:flex;gap:4px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;}
+.sched-strip::-webkit-scrollbar{display:none;}
+.sched-pill{flex-shrink:0;background:var(--surface2);border:0.5px solid var(--border);border-radius:20px;padding:4px 10px;font-size:11px;color:var(--text2);white-space:nowrap;}
+.sched-pill.current{background:var(--accent);color:#fff;border-color:var(--accent);}
+.sched-pill.done{opacity:0.35;}
+
+/* QUICK LINKS */
+.links-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.link-btn{display:flex;align-items:center;gap:10px;background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--r);padding:10px 12px;cursor:pointer;text-decoration:none;color:var(--text);transition:all 0.15s;font-family:'Jost',sans-serif;font-size:13px;}
+.link-btn:hover{border-color:var(--border2);background:var(--surface3);transform:translateY(-1px);}
+.link-icon{font-size:18px;width:24px;text-align:center;flex-shrink:0;}
+.link-label{font-size:13px;color:var(--text);}
+.link-sub{font-size:10px;color:var(--text3);margin-top:1px;}
+
+/* TODO */
+.todo-input-row{display:flex;gap:8px;margin-bottom:12px;}
+.todo-input-row input{flex:1;background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--r);padding:8px 12px;font-size:13px;font-family:'Jost',sans-serif;color:var(--text);outline:none;}
+.todo-input-row input:focus{border-color:var(--accent);}
+.todo-input-row input::placeholder{color:var(--text3);}
+.todo-add-btn{background:var(--accent);border:none;border-radius:var(--r);padding:8px 14px;color:#fff;font-size:13px;cursor:pointer;font-family:'Jost',sans-serif;flex-shrink:0;}
+.todo-add-btn:hover{opacity:0.85;}
+.todo-list{list-style:none;max-height:200px;overflow-y:auto;}
+.todo-item{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:0.5px solid var(--border);font-size:13px;}
+.todo-item:last-child{border:none;}
+.todo-item input[type=checkbox]{width:15px;height:15px;accent-color:var(--accent);flex-shrink:0;}
+.todo-item span{flex:1;color:var(--text);}
+.todo-item span.done{text-decoration:line-through;color:var(--text3);}
+.todo-del{background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px;padding:0 2px;line-height:1;}
+.todo-del:hover{color:var(--accent);}
+.todo-empty{font-size:13px;color:var(--text3);padding:8px 0;font-style:italic;}
+
+/* NOTES */
+.notes-area{width:100%;background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--r);padding:10px 12px;font-size:13px;font-family:'Jost',sans-serif;color:var(--text);outline:none;resize:none;min-height:110px;line-height:1.7;}
+.notes-area:focus{border-color:var(--accent);}
+.notes-area::placeholder{color:var(--text3);}
+.notes-saved{font-size:11px;color:var(--text3);margin-top:6px;text-align:right;min-height:16px;}
+
+/* LINCOLN FULL SCHEDULE */
+.sched-full{max-height:280px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--surface3) transparent;}
+.sched-row{display:grid;grid-template-columns:80px 1fr;gap:0;border-bottom:0.5px solid var(--border);}
+.sched-row:last-child{border:none;}
+.sched-t{font-size:11px;color:var(--text3);padding:9px 12px 9px 0;text-align:right;border-right:1.5px solid var(--border2);position:relative;}
+.sched-t::after{content:'';width:6px;height:6px;border-radius:50%;background:var(--border2);position:absolute;right:-4px;top:50%;transform:translateY(-50%);}
+.sched-row.now .sched-t::after{background:var(--accent);}
+.sched-row.now .sched-t{color:var(--accent);}
+.sched-l{font-size:13px;padding:9px 0 9px 14px;color:var(--text2);}
+.sched-row.now .sched-l{color:var(--accent);font-weight:500;}
+.sched-row.past .sched-l,.sched-row.past .sched-t{opacity:0.35;}
+
+/* FOCUS */
+.focus-input{width:100%;background:transparent;border:none;border-bottom:0.5px solid var(--border2);padding:6px 0;font-family:'Playfair Display',serif;font-size:22px;color:var(--gold);text-align:center;outline:none;margin-top:8px;}
+.focus-input::placeholder{color:var(--text3);font-style:italic;}
+
+/* DEADLINES */
+.deadline-list{list-style:none;max-height:220px;overflow-y:auto;}
+.deadline-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:0.5px solid var(--border);font-size:13px;}
+.deadline-item:last-child{border:none;}
+.deadline-class{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:#fff;background:var(--accent2);border-radius:20px;padding:2px 8px;flex-shrink:0;}
+.deadline-name{flex:1;color:var(--text);}
+.deadline-due{font-size:11px;color:var(--text3);flex-shrink:0;}
+.deadline-due.urgent{color:#c0392b;font-weight:500;}
+.deadline-due.soon{color:var(--accent);font-weight:500;}
+.deadline-empty{font-size:13px;color:var(--text3);padding:8px 0;font-style:italic;}
+
+/* HABIT TRACKER */
+.habit-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:0.5px solid var(--border);}
+.habit-row:last-child{border:none;}
+.habit-name{flex:1;font-size:13px;color:var(--text);}
+.habit-dots{display:flex;gap:5px;}
+.habit-dot{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border2);cursor:pointer;transition:all 0.15s;flex-shrink:0;}
+.habit-dot.checked{background:var(--accent2);border-color:var(--accent2);}
+.habit-add-row{display:flex;gap:8px;margin-top:10px;}
+.habit-add-row input{flex:1;background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--r);padding:7px 10px;font-size:12px;font-family:'Jost',sans-serif;color:var(--text);outline:none;}
+.habit-add-row input:focus{border-color:var(--accent2);}
+.habit-add-row input::placeholder{color:var(--text3);}
+.habit-add-btn{background:var(--accent2);border:none;border-radius:var(--r);padding:7px 12px;color:#fff;font-size:13px;cursor:pointer;}
+.habit-add-btn:hover{opacity:0.85;}
+.habit-del{background:none;border:none;color:var(--text3);cursor:pointer;font-size:15px;line-height:1;}
+.habit-del:hover{color:#c0392b;}
+.habit-day-labels{display:flex;gap:5px;justify-content:flex-end;margin-bottom:4px;}
+.habit-day-label{width:18px;font-size:9px;color:var(--text3);text-align:center;}
+
+/* MOOD */
+.mood-row{display:flex;gap:8px;justify-content:center;margin:8px 0;}
+.mood-btn{background:var(--surface2);border:1.5px solid var(--border);border-radius:50%;width:40px;height:40px;font-size:20px;cursor:pointer;transition:all 0.15s;display:flex;align-items:center;justify-content:center;}
+.mood-btn:hover{transform:scale(1.15);}
+.mood-btn.selected{border-color:var(--accent);background:rgba(192,122,58,0.1);transform:scale(1.15);}
+.mood-log{max-height:100px;overflow-y:auto;margin-top:8px;}
+.mood-entry{font-size:11px;color:var(--text3);padding:3px 0;border-bottom:0.5px solid var(--border);display:flex;gap:8px;}
+.mood-entry:last-child{border:none;}
+.mood-note-input{width:100%;background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--r);padding:6px 10px;font-size:12px;font-family:'Jost',sans-serif;color:var(--text);outline:none;margin-top:8px;}
+.mood-note-input:focus{border-color:var(--accent);}
+.mood-note-input::placeholder{color:var(--text3);}
+
+/* POMODORO */
+.pomo-display{font-family:'Playfair Display',serif;font-size:48px;color:var(--text);text-align:center;letter-spacing:-1px;margin:8px 0 4px;}
+.pomo-label{font-size:11px;color:var(--text3);text-align:center;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;}
+.pomo-controls{display:flex;gap:8px;justify-content:center;}
+.pomo-btn{background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--r);padding:8px 16px;font-size:13px;cursor:pointer;font-family:'Jost',sans-serif;color:var(--text);transition:all 0.15s;}
+.pomo-btn:hover{background:var(--surface3);}
+.pomo-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent);}
+.pomo-btn.primary:hover{opacity:0.85;}
+.pomo-progress{height:3px;background:var(--surface2);border-radius:2px;margin:12px 0 8px;overflow:hidden;}
+.pomo-progress-bar{height:100%;background:var(--accent);border-radius:2px;transition:width 1s linear;}
+.pomo-count{font-size:11px;color:var(--text3);text-align:center;}
+
+/* RESPONSIVE */
+@media(max-width:900px){.grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:600px){
+  .header{grid-template-columns:1fr;gap:1rem;}
+  .weather-block{text-align:left;}
+  .grid,.grid2{grid-template-columns:1fr;}
+  .app{padding:1.25rem 1rem;}
+}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="greeting-block">
+      <div class="time-display"><span id="time-h"></span><span style="color:var(--text2);animation:blink 1s step-end infinite;">:</span><span id="time-m"></span></div>
+      <div class="date-display" id="date-display"></div>
+      <div class="greeting-text" id="greeting-text"></div>
+    </div>
+    <div class="weather-block">
+      <div class="weather-temp" id="weather-temp">--°</div>
+      <div class="weather-desc" id="weather-desc">Loading...</div>
+      <div class="weather-loc">Washington, IN</div>
+    </div>
+  </div>
+
+  <!-- ROW 1: Focus + Lincoln Now + Quick Links -->
+  <div class="grid">
+    <div class="card">
+      <div class="card-accent-line line-gold"></div>
+      <div class="card-label">Today's focus</div>
+      <input class="focus-input" id="focus-input" placeholder="What matters most today?" maxlength="60" oninput="saveFocus()"/>
+      <div class="notes-saved" id="focus-saved"></div>
+    </div>
+    <div class="card">
+      <div class="card-accent-line line-orange"></div>
+      <div class="card-label">Lincoln is...</div>
+      <div class="lincoln-time" id="lincoln-time-display"></div>
+      <div class="lincoln-now" id="lincoln-now-label">—</div>
+      <div class="lincoln-next" id="lincoln-next-label"></div>
+      <div style="margin-top:12px;"><div class="sched-strip" id="sched-strip"></div></div>
+    </div>
+    <div class="card">
+      <div class="card-accent-line line-green"></div>
+      <div class="card-label">Quick launch</div>
+      <div class="links-grid">
+        <a class="link-btn" href="https://calendar.google.com" target="_blank"><span class="link-icon">📅</span><div><div class="link-label">Calendar</div><div class="link-sub">Google</div></div></a>
+        <a class="link-btn" href="https://app.ynab.com" target="_blank"><span class="link-icon">💰</span><div><div class="link-label">YNAB</div><div class="link-sub">Budget</div></div></a>
+        <a class="link-btn" href="https://todo.microsoft.com" target="_blank"><span class="link-icon">✅</span><div><div class="link-label">To Do</div><div class="link-sub">Microsoft</div></div></a>
+        <a class="link-btn" href="https://recipe-box-epps.netlify.app" target="_blank"><span class="link-icon">🍽️</span><div><div class="link-label">Recipe Box</div><div class="link-sub">Your app</div></div></a>
+        <a class="link-btn" href="https://canvas.iu.edu" target="_blank"><span class="link-icon">🎓</span><div><div class="link-label">Canvas</div><div class="link-sub">IUSE</div></div></a>
+        <a class="link-btn" href="https://github.com/OprahWinfreysMicrophone/aj-life-dashboard" target="_blank"><span class="link-icon">💻</span><div><div class="link-label">GitHub</div><div class="link-sub">Dashboard repo</div></div></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: Pomodoro + Mood + Habits -->
+  <div class="grid">
+    <!-- POMODORO -->
+    <div class="card">
+      <div class="card-accent-line line-orange"></div>
+      <div class="card-label">⏱ Focus Timer</div>
+      <div class="pomo-display" id="pomo-display">25:00</div>
+      <div class="pomo-label" id="pomo-label">Work session</div>
+      <div class="pomo-progress"><div class="pomo-progress-bar" id="pomo-bar" style="width:100%"></div></div>
+      <div class="pomo-count" id="pomo-count">Session 1 of 4</div>
+      <div class="pomo-controls" style="margin-top:10px;">
+        <button class="pomo-btn" onclick="pomoPrev()">‹</button>
+        <button class="pomo-btn primary" id="pomo-start-btn" onclick="pomoToggle()">Start</button>
+        <button class="pomo-btn" onclick="pomoReset()">Reset</button>
+        <button class="pomo-btn" onclick="pomoNext()">›</button>
+      </div>
+    </div>
+
+    <!-- MOOD -->
+    <div class="card">
+      <div class="card-accent-line line-gold"></div>
+      <div class="card-label">Mood check-in</div>
+      <div class="mood-row">
+        <button class="mood-btn" onclick="logMood('😤','Frustrated')" title="Frustrated">😤</button>
+        <button class="mood-btn" onclick="logMood('😔','Low')" title="Low">😔</button>
+        <button class="mood-btn" onclick="logMood('😐','Meh')" title="Meh">😐</button>
+        <button class="mood-btn" onclick="logMood('🙂','Okay')" title="Okay">🙂</button>
+        <button class="mood-btn" onclick="logMood('😄','Good')" title="Good">😄</button>
+      </div>
+      <input class="mood-note-input" id="mood-note" placeholder="Optional note..." maxlength="80"/>
+      <div class="mood-log" id="mood-log"></div>
+    </div>
+
+    <!-- HABITS -->
+    <div class="card">
+      <div class="card-accent-line line-green"></div>
+      <div class="card-label">Habits</div>
+      <div class="habit-day-labels" id="habit-day-labels"></div>
+      <div id="habit-list"></div>
+      <div class="habit-add-row">
+        <input type="text" id="habit-input" placeholder="Add habit..." onkeydown="if(event.key==='Enter')addHabit()"/>
+        <button class="habit-add-btn" onclick="addHabit()">+</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: Email + Mini Calendar -->
+  <div class="grid2">
+    <div class="card">
+      <div class="card-accent-line line-orange"></div>
+      <div class="card-label">📬 Email Hub</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <a class="link-btn" href="https://mail.google.com/mail?authuser=quickfetchdelivery@gmail.com" target="_blank"><span class="link-icon">📦</span><div><div class="link-label">quickfetch</div><div class="link-sub">Gmail • Business</div></div></a>
+        <a class="link-btn" href="https://mail.google.com/mail?authuser=alainajepps@gmail.com" target="_blank"><span class="link-icon">✉️</span><div><div class="link-label">alainajepps</div><div class="link-sub">Gmail • Personal</div></div></a>
+        <a class="link-btn" href="https://mail.google.com/mail?authuser=eppsfamily1k@gmail.com" target="_blank"><span class="link-icon">✉️</span><div><div class="link-label">eppsfamily1k</div><div class="link-sub">Gmail • Family</div></div></a>
+        <a class="link-btn" href="https://mail.yahoo.com" target="_blank"><span class="link-icon">📬</span><div><div class="link-label">Yahoo Mail</div><div class="link-sub">All accounts</div></div></a>
+        <a class="link-btn" href="https://outlook.office.com/mail/" target="_blank"><span class="link-icon">🎓</span><div><div class="link-label">eppsala@iu.edu</div><div class="link-sub">Outlook • IU</div></div></a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-accent-line line-gold"></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <span class="card-label" style="margin:0;" id="cal-month-label"></span>
+        <div style="display:flex;gap:4px;">
+          <button onclick="calPrev()" style="background:var(--surface2);border:0.5px solid var(--border);border-radius:6px;width:24px;height:24px;cursor:pointer;font-size:12px;color:var(--text2);">‹</button>
+          <button onclick="calNext()" style="background:var(--surface2);border:0.5px solid var(--border);border-radius:6px;width:24px;height:24px;cursor:pointer;font-size:12px;color:var(--text2);">›</button>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px;">
+        <div style="font-size:10px;color:var(--text3);text-align:center;font-weight:500;">Su</div>
+        <div style="font-size:10px;color:var(--text3);text-align:center;font-weight:500;">Mo</div>
+        <div style="font-size:10px;color:var(--text3);text-align:center;font-weight:500;">Tu</div>
+        <div style="font-size:10px;color:var(--text3);text-align:center;font-weight:500;">We</div>
+        <div style="font-size:10px;color:var(--text3);text-align:center;font-weight:500;">Th</div>
+        <div style="font-size:10px;color:var(--text3);text-align:center;font-weight:500;">Fr</div>
+        <div style="font-size:10px;color:var(--text3);text-align:center;font-weight:500;">Sa</div>
+      </div>
+      <div id="cal-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;"></div>
+    </div>
+  </div>
+
+  <!-- ROW 4: To-do + Notes + Lincoln Schedule -->
+  <div class="grid">
+    <div class="card">
+      <div class="card-accent-line line-orange"></div>
+      <div class="card-label">Today's tasks</div>
+      <div class="todo-input-row">
+        <input type="text" id="todo-input" placeholder="Add a task..." onkeydown="if(event.key==='Enter')addTodo()"/>
+        <button class="todo-add-btn" onclick="addTodo()">+</button>
+      </div>
+      <ul class="todo-list" id="todo-list"></ul>
+    </div>
+    <div class="card">
+      <div class="card-accent-line line-green"></div>
+      <div class="card-label">Brain dump</div>
+      <textarea class="notes-area" id="notes-area" placeholder="Thoughts, reminders, anything on your mind..." oninput="saveNotes()"></textarea>
+      <div class="notes-saved" id="notes-saved"></div>
+    </div>
+    <div class="card">
+      <div class="card-accent-line line-gold"></div>
+      <div class="card-label">Lincoln's full day</div>
+      <div class="sched-full" id="sched-full"></div>
+    </div>
+  </div>
+
+  <!-- SCHOOL DEADLINES -->
+  <div class="card" style="margin-bottom:14px;">
+    <div class="card-accent-line line-green"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+      <span class="card-label" style="margin:0;">🎓 School Deadlines</span>
+      <button onclick="loadCanvas()" style="background:var(--surface2);border:0.5px solid var(--border);border-radius:8px;padding:4px 10px;font-size:11px;color:var(--text2);cursor:pointer;font-family:'Jost',sans-serif;">↻ Refresh</button>
+    </div>
+    <div id="deadline-status" style="font-size:11px;color:var(--text3);margin-bottom:8px;font-style:italic;"></div>
+    <ul class="deadline-list" id="deadline-list"></ul>
+  </div>
+
+</div>
+
+<script>
+// ── LINCOLN SCHEDULE ──────────────────────────────────────────
+let SCHEDULE = [];
+function toMins(h,m){return h*60+m;}
+function parseLincolnICS(text) {
+  text = text.replace(/\r\n[ \t]/g,'').replace(/\r\n/g,'\n').replace(/\r/g,'\n');
+  const events = [];
+  const blocks = text.split('BEGIN:VEVENT');
+  for (let i = 1; i < blocks.length; i++) {
+    const b = blocks[i];
+    const getVal = (key) => { const m = b.match(new RegExp('^' + key + '[^:\n]*:(.+)$', 'm')); return m ? m[1].trim() : ''; };
+    const summary = getVal('SUMMARY'), dtstart = getVal('DTSTART');
+    if (!summary || !dtstart) continue;
+    const digits = dtstart.replace(/\D/g,'');
+    const h = parseInt(digits.slice(8,10)), m = parseInt(digits.slice(10,12));
+    if (isNaN(h) || isNaN(m)) continue;
+    const h12 = h % 12 || 12, ampm = h < 12 ? 'AM' : 'PM';
+    events.push({ time:`${h12}:${String(m).padStart(2,'0')} ${ampm}`, label:summary, h, m });
+  }
+  events.sort((a,b) => toMins(a.h,a.m) - toMins(b.h,b.m));
+  return events;
+}
+async function loadLincolnSchedule() {
+  try {
+    const res = await fetch('https://oprahwinfreysmicrophone-ec98b24423a411f185ecf2dde27853f2.web.val.run?feed=lincoln',{cache:'no-cache'});
+    SCHEDULE = parseLincolnICS(await res.text());
+    updateClock();
+  } catch(e) { console.error('Lincoln calendar error:',e); }
+}
+function getCurrentBlock(mins){
+  for(let i=0;i<SCHEDULE.length;i++){
+    const sm=toMins(SCHEDULE[i].h,SCHEDULE[i].m);
+    const em=i+1<SCHEDULE.length?toMins(SCHEDULE[i+1].h,SCHEDULE[i+1].m):24*60;
+    if(mins>=sm&&mins<em)return i;
+  }
+  return -1;
+}
+
+// ── CLOCK ─────────────────────────────────────────────────────
+function updateClock(){
+  const now=new Date(), h=now.getHours(), min=now.getMinutes();
+  const h12=h%12||12, ampm=h<12?'AM':'PM';
+  document.getElementById('time-h').textContent=h12;
+  document.getElementById('time-m').textContent=String(min).padStart(2,'0')+' '+ampm;
+  document.getElementById('date-display').textContent=now.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+  document.getElementById('greeting-text').textContent=(h>=17?'Good evening':h>=12?'Good afternoon':'Good morning')+', Alaina.';
+  const mins=h*60+min, ci=getCurrentBlock(mins);
+  const cur=ci>=0?SCHEDULE[ci]:null, nxt=ci>=0&&ci+1<SCHEDULE.length?SCHEDULE[ci+1]:null;
+  document.getElementById('lincoln-time-display').textContent=cur?cur.time:'';
+  document.getElementById('lincoln-now-label').textContent=cur?cur.label:'Done for the day';
+  document.getElementById('lincoln-next-label').textContent=nxt?'Next: '+nxt.time+' — '+nxt.label:'';
+  const start=Math.max(0,ci-1);
+  document.getElementById('sched-strip').innerHTML=SCHEDULE.slice(start,start+7).map((s,idx)=>{
+    const si=start+idx, isCur=si===ci, isPast=si<ci;
+    return `<div class="sched-pill ${isCur?'current':''} ${isPast?'done':''}">${s.time.replace(':00','')}</div>`;
+  }).join('');
+  document.getElementById('sched-full').innerHTML=SCHEDULE.map((s,i)=>`
+    <div class="sched-row ${i===ci?'now':''} ${i<ci?'past':''}">
+      <div class="sched-t">${s.time}</div>
+      <div class="sched-l">${s.label}</div>
+    </div>`).join('');
+}
+setInterval(updateClock,1000); updateClock(); loadLincolnSchedule();
+setInterval(loadLincolnSchedule,60*60*1000);
+
+// ── WEATHER ───────────────────────────────────────────────────
+async function loadWeather(){
+  try{
+    const res=await fetch('https://api.open-meteo.com/v1/forecast?latitude=38.6559&longitude=-87.1742&current_weather=true&temperature_unit=fahrenheit');
+    const data=await res.json(), temp=Math.round(data.current_weather.temperature), code=data.current_weather.weathercode;
+    const descs={0:'Clear',1:'Mostly clear',2:'Partly cloudy',3:'Overcast',45:'Foggy',48:'Icy fog',51:'Light drizzle',53:'Drizzle',55:'Heavy drizzle',61:'Light rain',63:'Rain',65:'Heavy rain',71:'Light snow',73:'Snow',75:'Heavy snow',80:'Showers',95:'Thunderstorm'};
+    document.getElementById('weather-temp').textContent=temp+'°F';
+    document.getElementById('weather-desc').textContent=descs[code]||'—';
+  }catch{document.getElementById('weather-temp').textContent='—';document.getElementById('weather-desc').textContent='Unavailable';}
+}
+loadWeather(); setInterval(loadWeather,10*60*1000);
+
+// ── TO-DO ─────────────────────────────────────────────────────
+let todos=JSON.parse(localStorage.getItem('dash_todos')||'[]');
+const todayStr=new Date().toDateString();
+if(localStorage.getItem('dash_todo_date')!==todayStr){todos=[];localStorage.setItem('dash_todos','[]');localStorage.setItem('dash_todo_date',todayStr);}
+function saveTodos(){localStorage.setItem('dash_todos',JSON.stringify(todos));}
+function addTodo(){const input=document.getElementById('todo-input'),text=input.value.trim();if(!text)return;todos.push({id:Date.now(),text,done:false});saveTodos();input.value='';renderTodos();}
+function toggleTodo(id){const t=todos.find(x=>x.id===id);if(t){t.done=!t.done;saveTodos();renderTodos();}}
+function deleteTodo(id){todos=todos.filter(x=>x.id!==id);saveTodos();renderTodos();}
+function renderTodos(){
+  const ul=document.getElementById('todo-list');
+  if(!todos.length){ul.innerHTML='<div class="todo-empty">Nothing yet — add something above.</div>';return;}
+  ul.innerHTML=todos.map(t=>`<li class="todo-item"><input type="checkbox" ${t.done?'checked':''} onchange="toggleTodo(${t.id})"/><span class="${t.done?'done':''}">${t.text}</span><button class="todo-del" onclick="deleteTodo(${t.id})">×</button></li>`).join('');
+}
+renderTodos();
+
+// ── NOTES ─────────────────────────────────────────────────────
+const notesArea=document.getElementById('notes-area');
+notesArea.value=localStorage.getItem('dash_notes')||'';
+let noteTimer;
+function saveNotes(){clearTimeout(noteTimer);noteTimer=setTimeout(()=>{localStorage.setItem('dash_notes',notesArea.value);document.getElementById('notes-saved').textContent='Saved.';setTimeout(()=>document.getElementById('notes-saved').textContent='',2000);},800);}
+
+// ── CALENDAR ──────────────────────────────────────────────────
+let calYear=new Date().getFullYear(),calMonth=new Date().getMonth();
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+function renderCal(){
+  const now=new Date();
+  document.getElementById('cal-month-label').textContent=MONTHS[calMonth]+' '+calYear;
+  const first=new Date(calYear,calMonth,1).getDay(),days=new Date(calYear,calMonth+1,0).getDate(),prev=new Date(calYear,calMonth,0).getDate();
+  let html='';
+  for(let i=0;i<first;i++)html+=`<div style="font-size:11px;text-align:center;padding:4px 2px;color:var(--text3);opacity:0.4;">${prev-first+i+1}</div>`;
+  for(let d=1;d<=days;d++){
+    const isToday=d===now.getDate()&&calMonth===now.getMonth()&&calYear===now.getFullYear();
+    html+=isToday?`<div style="font-size:11px;text-align:center;padding:4px 2px;background:var(--accent);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;margin:0 auto;font-weight:700;">${d}</div>`:`<div style="font-size:11px;text-align:center;padding:4px 2px;color:var(--text2);border-radius:6px;">${d}</div>`;
+  }
+  for(let i=1;i<=42-first-days;i++)html+=`<div style="font-size:11px;text-align:center;padding:4px 2px;color:var(--text3);opacity:0.4;">${i}</div>`;
+  document.getElementById('cal-grid').innerHTML=html;
+}
+function calPrev(){calMonth--;if(calMonth<0){calMonth=11;calYear--;}renderCal();}
+function calNext(){calMonth++;if(calMonth>11){calMonth=0;calYear++;}renderCal();}
+renderCal();
+
+// ── FOCUS ─────────────────────────────────────────────────────
+const focusInput=document.getElementById('focus-input');
+focusInput.value=localStorage.getItem('dash_focus_'+todayStr)||'';
+let focusTimer;
+function saveFocus(){clearTimeout(focusTimer);focusTimer=setTimeout(()=>{localStorage.setItem('dash_focus_'+todayStr,focusInput.value);document.getElementById('focus-saved').textContent='Saved.';setTimeout(()=>document.getElementById('focus-saved').textContent='',2000);},600);}
+
+// ── CANVAS DEADLINES ──────────────────────────────────────────
+function parseICS(text) {
+  text = text.replace(/\r\n[ \t]/g,'').replace(/\r\n/g,'\n').replace(/\r/g,'\n');
+  const events=[];
+  const blocks=text.split('BEGIN:VEVENT');
+  for(let i=1;i<blocks.length;i++){
+    const b=blocks[i];
+    const getVal=(key)=>{const m=b.match(new RegExp('^'+key+'[^:\n]*:(.+)$','m'));return m?m[1].trim():'';};
+    const summary=getVal('SUMMARY'),dtstart=getVal('DTSTART'),url=getVal('URL');
+    if(!summary||!dtstart)continue;
+    const digits=dtstart.replace(/\D/g,''),yr=digits.slice(0,4),mo=digits.slice(4,6),dy=digits.slice(6,8);
+    if(!yr||!mo||!dy)continue;
+    const clsMatch=summary.match(/\[[\w]+-[\w]+-[\w]+-(\w+\d+)-\d+\]/);
+    const cls=clsMatch?clsMatch[1]:'Course';
+    const name=summary.replace(/\s*\[.*?\]\s*/g,'').trim();
+    events.push({cls,name,date:`${yr}-${mo}-${dy}`,url});
+  }
+  return events;
+}
+async function loadCanvas(){
+  const status=document.getElementById('deadline-status'),ul=document.getElementById('deadline-list');
+  status.textContent='Syncing with Canvas...';ul.innerHTML='';
+  try{
+    const res=await fetch('https://oprahwinfreysmicrophone-ec98b24423a411f185ecf2dde27853f2.web.val.run?feed=canvas',{cache:'no-cache'});
+    const events=parseICS(await res.text());
+    const today=new Date();today.setHours(0,0,0,0);
+    const upcoming=events.filter(e=>new Date(e.date+'T00:00:00')>=today).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,15);
+    if(!upcoming.length){ul.innerHTML='<div class="deadline-empty">No upcoming deadlines found.</div>';status.textContent='Synced just now.';return;}
+    ul.innerHTML=upcoming.map(d=>{
+      const due=new Date(d.date+'T00:00:00'),diff=Math.round((due-today)/86400000);
+      const dueLabel=diff===0?'Due today':diff===1?'Tomorrow':`${diff}d left`;
+      const urgencyClass=diff<=1?'urgent':diff<=3?'soon':'';
+      return `<li class="deadline-item"><span class="deadline-class">${d.cls}</span><a href="${d.url}" target="_blank" class="deadline-name" style="color:var(--text);text-decoration:none;">${d.name.length>50?d.name.slice(0,50)+'…':d.name}</a><span class="deadline-due ${urgencyClass}">${dueLabel}</span></li>`;
+    }).join('');
+    status.textContent=`Synced • ${upcoming.length} upcoming`;
+  }catch(e){status.textContent='Sync failed — '+e.message;ul.innerHTML='<div class="deadline-empty">Could not load Canvas deadlines.</div>';}
+}
+loadCanvas();
+
+// ── POMODORO ──────────────────────────────────────────────────
+const POMO_TIMES={work:25*60,short:5*60,long:15*60};
+let pomoMode='work',pomoSeconds=POMO_TIMES.work,pomoRunning=false,pomoInterval=null,pomoSession=1,pomoTotal=4;
+function pomoDisplay(){
+  const m=Math.floor(pomoSeconds/60),s=pomoSeconds%60;
+  document.getElementById('pomo-display').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  const total=POMO_TIMES[pomoMode];
+  document.getElementById('pomo-bar').style.width=(pomoSeconds/total*100)+'%';
+  document.getElementById('pomo-label').textContent=pomoMode==='work'?'Work session':pomoMode==='short'?'Short break':'Long break';
+  document.getElementById('pomo-count').textContent=`Session ${pomoSession} of ${pomoTotal}`;
+}
+function pomoToggle(){
+  if(pomoRunning){clearInterval(pomoInterval);pomoRunning=false;document.getElementById('pomo-start-btn').textContent='Resume';}
+  else{
+    pomoRunning=true;document.getElementById('pomo-start-btn').textContent='Pause';
+    pomoInterval=setInterval(()=>{
+      if(pomoSeconds>0){pomoSeconds--;pomoDisplay();}
+      else{clearInterval(pomoInterval);pomoRunning=false;document.getElementById('pomo-start-btn').textContent='Start';
+        if(pomoMode==='work'){pomoSession++;if(pomoSession>pomoTotal)pomoSession=1;}
+        pomoMode=pomoMode==='work'?(pomoSession%4===0?'long':'short'):'work';
+        pomoSeconds=POMO_TIMES[pomoMode];pomoDisplay();
+        new Notification&&Notification.permission==='granted'&&new Notification('Timer done!',{body:pomoMode==='work'?'Time to focus!':'Take a break.'});
+      }
+    },1000);
+  }
+}
+function pomoReset(){clearInterval(pomoInterval);pomoRunning=false;pomoSeconds=POMO_TIMES[pomoMode];document.getElementById('pomo-start-btn').textContent='Start';pomoDisplay();}
+function pomoPrev(){clearInterval(pomoInterval);pomoRunning=false;document.getElementById('pomo-start-btn').textContent='Start';const modes=['work','short','long'];let i=modes.indexOf(pomoMode);i=(i-1+modes.length)%modes.length;pomoMode=modes[i];pomoSeconds=POMO_TIMES[pomoMode];pomoDisplay();}
+function pomoNext(){clearInterval(pomoInterval);pomoRunning=false;document.getElementById('pomo-start-btn').textContent='Start';const modes=['work','short','long'];let i=modes.indexOf(pomoMode);i=(i+1)%modes.length;pomoMode=modes[i];pomoSeconds=POMO_TIMES[pomoMode];pomoDisplay();}
+pomoDisplay();
+if('Notification' in window && Notification.permission==='default') Notification.requestPermission();
+
+// ── MOOD ──────────────────────────────────────────────────────
+let moodLog=JSON.parse(localStorage.getItem('dash_mood_'+todayStr)||'[]');
+function logMood(emoji,label){
+  document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('selected'));
+  event.currentTarget.classList.add('selected');
+  const note=document.getElementById('mood-note').value.trim();
+  const now=new Date();
+  const time=now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+  moodLog.push({emoji,label,note,time});
+  localStorage.setItem('dash_mood_'+todayStr,JSON.stringify(moodLog));
+  document.getElementById('mood-note').value='';
+  renderMoodLog();
+}
+function renderMoodLog(){
+  const el=document.getElementById('mood-log');
+  if(!moodLog.length){el.innerHTML='<div style="font-size:11px;color:var(--text3);font-style:italic;padding:4px 0;">No check-ins yet today.</div>';return;}
+  el.innerHTML=[...moodLog].reverse().map(e=>`<div class="mood-entry"><span>${e.emoji}</span><span style="color:var(--text2);">${e.label}${e.note?' — '+e.note:''}</span><span style="margin-left:auto;">${e.time}</span></div>`).join('');
+}
+renderMoodLog();
+
+// ── HABITS ────────────────────────────────────────────────────
+const HABIT_DAYS=7;
+let habits=JSON.parse(localStorage.getItem('dash_habits')||'[]');
+function getWeekDates(){
+  const dates=[];const now=new Date();
+  for(let i=HABIT_DAYS-1;i>=0;i--){const d=new Date(now);d.setDate(d.getDate()-i);dates.push(d.toDateString());}
+  return dates;
+}
+function getDayLabel(dateStr){const d=new Date(dateStr);return ['Su','Mo','Tu','We','Th','Fr','Sa'][d.getDay()];}
+function saveHabits(){localStorage.setItem('dash_habits',JSON.stringify(habits));}
+function addHabit(){
+  const input=document.getElementById('habit-input'),name=input.value.trim();
+  if(!name)return;
+  habits.push({id:Date.now(),name,checks:{}});
+  saveHabits();input.value='';renderHabits();
+}
+function toggleHabitDay(id,dateStr){
+  const h=habits.find(x=>x.id===id);if(!h)return;
+  h.checks[dateStr]=!h.checks[dateStr];
+  saveHabits();renderHabits();
+}
+function deleteHabit(id){habits=habits.filter(x=>x.id!==id);saveHabits();renderHabits();}
+function renderHabits(){
+  const weekDates=getWeekDates();
+  document.getElementById('habit-day-labels').innerHTML=weekDates.map(d=>`<div class="habit-day-label">${getDayLabel(d)}</div>`).join('');
+  const el=document.getElementById('habit-list');
+  if(!habits.length){el.innerHTML='<div style="font-size:12px;color:var(--text3);font-style:italic;padding:6px 0;">Add habits below.</div>';return;}
+  el.innerHTML=habits.map(h=>`
+    <div class="habit-row">
+      <span class="habit-name">${h.name}</span>
+      <div class="habit-dots">${weekDates.map(d=>`<div class="habit-dot ${h.checks[d]?'checked':''}" onclick="toggleHabitDay(${h.id},'${d}')" title="${d}"></div>`).join('')}</div>
+      <button class="habit-del" onclick="deleteHabit(${h.id})">×</button>
+    </div>`).join('');
+}
+renderHabits();
+</script>
+</body>
+</html>
