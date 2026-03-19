@@ -8,26 +8,26 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --bg:#f5f3ee;
+  --bg:#efece4;
   --surface:#ffffff;
-  --surface2:#eeebe4;
-  --surface3:#e4e0d8;
-  --text:#1c1a16;
-  --text2:#7a7060;
-  --text3:#a89f90;
-  --accent:#c07a3a;
-  --accent2:#4a8c60;
-  --gold:#b8860b;
-  --border:rgba(0,0,0,0.08);
-  --border2:rgba(0,0,0,0.15);
+  --surface2:#e5e0d5;
+  --surface3:#d8d2c6;
+  --text:#111009;
+  --text2:#4a4235;
+  --text3:#7a6f60;
+  --accent:#b06828;
+  --accent2:#2e7a4a;
+  --gold:#9a7008;
+  --border:rgba(0,0,0,0.13);
+  --border2:rgba(0,0,0,0.22);
   --r:12px;
   --rlg:18px;
 }
-html,body{min-height:100vh;background:var(--bg);color:var(--text);font-family:'Jost',sans-serif;}
+html,body{min-height:100vh;background:var(--bg);color:var(--text);font-family:'Jost',sans-serif;font-size:15px;}
 body::before{
   content:'';position:fixed;inset:0;
-  background:radial-gradient(ellipse at 20% 50%, rgba(192,122,58,0.05) 0%, transparent 60%),
-             radial-gradient(ellipse at 80% 20%, rgba(74,140,96,0.05) 0%, transparent 50%);
+  background:radial-gradient(ellipse at 20% 50%, rgba(176,104,40,0.06) 0%, transparent 60%),
+             radial-gradient(ellipse at 80% 20%, rgba(46,122,74,0.06) 0%, transparent 50%);
   pointer-events:none;z-index:0;
 }
 .app{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:2rem 1.5rem;}
@@ -35,83 +35,83 @@ body::before{
 .header{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:start;margin-bottom:2rem;}
 .time-display{font-family:'Playfair Display',serif;font-size:clamp(52px,8vw,88px);line-height:1;color:var(--text);letter-spacing:-2px;margin-bottom:0.25rem;}
 .time-display span{color:var(--accent);}
-.date-display{font-size:14px;color:var(--text2);font-weight:300;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.5rem;}
-.greeting-text{font-family:'Playfair Display',serif;font-size:20px;font-style:italic;color:var(--text2);}
+.date-display{font-size:15px;color:var(--text2);font-weight:400;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.5rem;}
+.greeting-text{font-family:'Playfair Display',serif;font-size:21px;font-style:italic;color:var(--text2);}
 .weather-block{text-align:right;min-width:120px;}
 .weather-temp{font-family:'Playfair Display',serif;font-size:42px;color:var(--text);line-height:1;}
-.weather-desc{font-size:12px;color:var(--text2);margin-top:4px;letter-spacing:0.05em;text-transform:uppercase;}
-.weather-loc{font-size:11px;color:var(--text3);margin-top:2px;}
+.weather-desc{font-size:13px;color:var(--text2);margin-top:4px;letter-spacing:0.05em;text-transform:uppercase;}
+.weather-loc{font-size:12px;color:var(--text3);margin-top:2px;}
 
 .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
 
-.card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rlg);padding:1.25rem;position:relative;overflow:hidden;}
-.card-label{font-size:10px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;}
-.card-accent-line{position:absolute;top:0;left:0;right:0;height:2px;}
+.card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rlg);padding:1.35rem;position:relative;overflow:hidden;}
+.card-label{font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;}
+.card-accent-line{position:absolute;top:0;left:0;right:0;height:2.5px;}
 .line-orange{background:linear-gradient(90deg,var(--accent),transparent);}
 .line-green{background:linear-gradient(90deg,var(--accent2),transparent);}
 .line-gold{background:linear-gradient(90deg,var(--gold),transparent);}
 
-.lincoln-now{font-family:'Playfair Display',serif;font-size:22px;color:var(--accent);margin-bottom:4px;line-height:1.3;}
-.lincoln-next{font-size:13px;color:var(--text3);}
-.lincoln-time{font-size:11px;color:var(--text2);margin-bottom:6px;}
+.lincoln-now{font-family:'Playfair Display',serif;font-size:23px;color:var(--accent);margin-bottom:4px;line-height:1.3;}
+.lincoln-next{font-size:14px;color:var(--text3);}
+.lincoln-time{font-size:12px;color:var(--text2);margin-bottom:6px;}
 .sched-strip{display:flex;gap:4px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;}
 .sched-strip::-webkit-scrollbar{display:none;}
-.sched-pill{flex-shrink:0;background:var(--surface2);border:0.5px solid var(--border);border-radius:20px;padding:4px 10px;font-size:11px;color:var(--text2);white-space:nowrap;}
+.sched-pill{flex-shrink:0;background:var(--surface2);border:0.5px solid var(--border2);border-radius:20px;padding:4px 10px;font-size:12px;color:var(--text2);white-space:nowrap;}
 .sched-pill.current{background:var(--accent);color:#fff;border-color:var(--accent);}
 .sched-pill.done{opacity:0.35;}
 
 .links-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.link-btn{display:flex;align-items:center;gap:10px;background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--r);padding:10px 12px;cursor:pointer;text-decoration:none;color:var(--text);transition:all 0.15s;font-family:'Jost',sans-serif;font-size:13px;}
+.link-btn{display:flex;align-items:center;gap:10px;background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--r);padding:10px 12px;cursor:pointer;text-decoration:none;color:var(--text);transition:all 0.15s;font-family:'Jost',sans-serif;font-size:14px;}
 .link-btn:hover{border-color:var(--border2);background:var(--surface3);transform:translateY(-1px);}
 .link-icon{font-size:18px;width:24px;text-align:center;flex-shrink:0;}
-.link-label{font-size:13px;color:var(--text);}
-.link-sub{font-size:10px;color:var(--text3);margin-top:1px;}
+.link-label{font-size:14px;color:var(--text);}
+.link-sub{font-size:11px;color:var(--text3);margin-top:1px;}
 
 .todo-input-row{display:flex;gap:8px;margin-bottom:12px;}
-.todo-input-row input{flex:1;background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--r);padding:8px 12px;font-size:13px;font-family:'Jost',sans-serif;color:var(--text);outline:none;}
+.todo-input-row input{flex:1;background:var(--surface2);border:0.5px solid var(--border2);border-radius:var(--r);padding:8px 12px;font-size:14px;font-family:'Jost',sans-serif;color:var(--text);outline:none;}
 .todo-input-row input:focus{border-color:var(--accent);}
 .todo-input-row input::placeholder{color:var(--text3);}
-.todo-add-btn{background:var(--accent);border:none;border-radius:var(--r);padding:8px 14px;color:#fff;font-size:13px;cursor:pointer;font-family:'Jost',sans-serif;flex-shrink:0;}
+.todo-add-btn{background:var(--accent);border:none;border-radius:var(--r);padding:8px 14px;color:#fff;font-size:14px;cursor:pointer;font-family:'Jost',sans-serif;flex-shrink:0;}
 .todo-add-btn:hover{opacity:0.85;}
 .todo-list{list-style:none;max-height:200px;overflow-y:auto;}
-.todo-item{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:0.5px solid var(--border);font-size:13px;}
+.todo-item{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:0.5px solid var(--border);font-size:14px;}
 .todo-item:last-child{border:none;}
-.todo-item input[type=checkbox]{width:15px;height:15px;accent-color:var(--accent);flex-shrink:0;}
+.todo-item input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);flex-shrink:0;}
 .todo-item span{flex:1;color:var(--text);}
 .todo-item span.done{text-decoration:line-through;color:var(--text3);}
-.todo-del{background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px;padding:0 2px;line-height:1;}
+.todo-del{background:none;border:none;color:var(--text3);cursor:pointer;font-size:17px;padding:0 2px;line-height:1;}
 .todo-del:hover{color:var(--accent);}
-.todo-empty{font-size:13px;color:var(--text3);padding:8px 0;font-style:italic;}
+.todo-empty{font-size:14px;color:var(--text3);padding:8px 0;font-style:italic;}
 
-.notes-area{width:100%;background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--r);padding:10px 12px;font-size:13px;font-family:'Jost',sans-serif;color:var(--text);outline:none;resize:none;min-height:110px;line-height:1.7;}
+.notes-area{width:100%;background:var(--surface2);border:0.5px solid var(--border2);border-radius:var(--r);padding:10px 12px;font-size:14px;font-family:'Jost',sans-serif;color:var(--text);outline:none;resize:none;min-height:110px;line-height:1.7;}
 .notes-area:focus{border-color:var(--accent);}
 .notes-area::placeholder{color:var(--text3);}
-.notes-saved{font-size:11px;color:var(--text3);margin-top:6px;text-align:right;min-height:16px;}
+.notes-saved{font-size:12px;color:var(--text3);margin-top:6px;text-align:right;min-height:16px;}
 
 .sched-full{max-height:280px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--surface3) transparent;}
-.sched-row{display:grid;grid-template-columns:80px 1fr;gap:0;border-bottom:0.5px solid var(--border);}
+.sched-row{display:grid;grid-template-columns:84px 1fr;gap:0;border-bottom:0.5px solid var(--border);}
 .sched-row:last-child{border:none;}
-.sched-t{font-size:11px;color:var(--text3);padding:9px 12px 9px 0;text-align:right;border-right:1.5px solid var(--border2);position:relative;}
+.sched-t{font-size:12px;color:var(--text3);padding:9px 12px 9px 0;text-align:right;border-right:1.5px solid var(--border2);position:relative;}
 .sched-t::after{content:'';width:6px;height:6px;border-radius:50%;background:var(--border2);position:absolute;right:-4px;top:50%;transform:translateY(-50%);}
 .sched-row.now .sched-t::after{background:var(--accent);}
 .sched-row.now .sched-t{color:var(--accent);}
-.sched-l{font-size:13px;padding:9px 0 9px 14px;color:var(--text2);}
+.sched-l{font-size:14px;padding:9px 0 9px 14px;color:var(--text2);}
 .sched-row.now .sched-l{color:var(--accent);font-weight:500;}
 .sched-row.past .sched-l,.sched-row.past .sched-t{opacity:0.35;}
 
-.focus-input{width:100%;background:transparent;border:none;border-bottom:0.5px solid var(--border2);padding:6px 0;font-family:'Playfair Display',serif;font-size:22px;color:var(--gold);text-align:center;outline:none;margin-top:8px;}
+.focus-input{width:100%;background:transparent;border:none;border-bottom:1px solid var(--border2);padding:6px 0;font-family:'Playfair Display',serif;font-size:22px;color:var(--gold);text-align:center;outline:none;margin-top:8px;}
 .focus-input::placeholder{color:var(--text3);font-style:italic;}
 
 .deadline-list{list-style:none;max-height:220px;overflow-y:auto;}
-.deadline-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:0.5px solid var(--border);font-size:13px;}
+.deadline-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:0.5px solid var(--border);font-size:14px;}
 .deadline-item:last-child{border:none;}
-.deadline-class{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:#fff;background:var(--accent2);border-radius:20px;padding:2px 8px;flex-shrink:0;}
+.deadline-class{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:#fff;background:var(--accent2);border-radius:20px;padding:2px 8px;flex-shrink:0;}
 .deadline-name{flex:1;color:var(--text);}
-.deadline-due{font-size:11px;color:var(--text3);flex-shrink:0;}
-.deadline-due.urgent{color:#c0392b;font-weight:500;}
+.deadline-due{font-size:12px;color:var(--text3);flex-shrink:0;}
+.deadline-due.urgent{color:#b02020;font-weight:600;}
 .deadline-due.soon{color:var(--accent);font-weight:500;}
-.deadline-empty{font-size:13px;color:var(--text3);padding:8px 0;font-style:italic;}
+.deadline-empty{font-size:14px;color:var(--text3);padding:8px 0;font-style:italic;}
 
 @media(max-width:900px){.grid{grid-template-columns:1fr 1fr;}}
 @media(max-width:600px){
@@ -126,7 +126,6 @@ body::before{
 <body>
 <div class="app">
 
-  <!-- HEADER -->
   <div class="header">
     <div class="greeting-block">
       <div class="time-display"><span id="time-h"></span><span style="color:var(--text2);animation:blink 1s step-end infinite;">:</span><span id="time-m"></span></div>
@@ -140,7 +139,6 @@ body::before{
     </div>
   </div>
 
-  <!-- ROW 1: Focus + Lincoln Now + Quick Links -->
   <div class="grid">
     <div class="card">
       <div class="card-accent-line line-gold"></div>
@@ -170,7 +168,6 @@ body::before{
     </div>
   </div>
 
-  <!-- ROW 2: Email + Mini Calendar -->
   <div class="grid2">
     <div class="card">
       <div class="card-accent-line line-orange"></div>
@@ -188,24 +185,23 @@ body::before{
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
         <span class="card-label" style="margin:0;" id="cal-month-label"></span>
         <div style="display:flex;gap:4px;">
-          <button onclick="calPrev()" style="background:var(--surface2);border:0.5px solid var(--border);border-radius:6px;width:24px;height:24px;cursor:pointer;font-size:12px;color:var(--text2);">‹</button>
-          <button onclick="calNext()" style="background:var(--surface2);border:0.5px solid var(--border);border-radius:6px;width:24px;height:24px;cursor:pointer;font-size:12px;color:var(--text2);">›</button>
+          <button onclick="calPrev()" style="background:var(--surface2);border:0.5px solid var(--border);border-radius:6px;width:26px;height:26px;cursor:pointer;font-size:13px;color:var(--text2);">‹</button>
+          <button onclick="calNext()" style="background:var(--surface2);border:0.5px solid var(--border);border-radius:6px;width:26px;height:26px;cursor:pointer;font-size:13px;color:var(--text2);">›</button>
         </div>
       </div>
       <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px;">
-        <div style="font-size:10px;color:var(--text3);text-align:center;font-weight:500;">Su</div>
-        <div style="font-size:10px;color:var(--text3);text-align:center;font-weight:500;">Mo</div>
-        <div style="font-size:10px;color:var(--text3);text-align:center;font-weight:500;">Tu</div>
-        <div style="font-size:10px;color:var(--text3);text-align:center;font-weight:500;">We</div>
-        <div style="font-size:10px;color:var(--text3);text-align:center;font-weight:500;">Th</div>
-        <div style="font-size:10px;color:var(--text3);text-align:center;font-weight:500;">Fr</div>
-        <div style="font-size:10px;color:var(--text3);text-align:center;font-weight:500;">Sa</div>
+        <div style="font-size:11px;color:var(--text3);text-align:center;font-weight:500;">Su</div>
+        <div style="font-size:11px;color:var(--text3);text-align:center;font-weight:500;">Mo</div>
+        <div style="font-size:11px;color:var(--text3);text-align:center;font-weight:500;">Tu</div>
+        <div style="font-size:11px;color:var(--text3);text-align:center;font-weight:500;">We</div>
+        <div style="font-size:11px;color:var(--text3);text-align:center;font-weight:500;">Th</div>
+        <div style="font-size:11px;color:var(--text3);text-align:center;font-weight:500;">Fr</div>
+        <div style="font-size:11px;color:var(--text3);text-align:center;font-weight:500;">Sa</div>
       </div>
       <div id="cal-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;"></div>
     </div>
   </div>
 
-  <!-- ROW 3: To-do + Notes + Lincoln Schedule -->
   <div class="grid">
     <div class="card">
       <div class="card-accent-line line-orange"></div>
@@ -225,18 +221,17 @@ body::before{
     <div class="card">
       <div class="card-accent-line line-gold"></div>
       <div class="card-label">Lincoln's full day</div>
-      <div class="sched-full" id="sched-full"><div style="font-size:12px;color:var(--text3);font-style:italic;">Loading schedule...</div></div>
+      <div class="sched-full" id="sched-full"><div style="font-size:13px;color:var(--text3);font-style:italic;">Loading schedule...</div></div>
     </div>
   </div>
 
-  <!-- SCHOOL DEADLINES -->
   <div class="card" style="margin-bottom:14px;">
     <div class="card-accent-line line-green"></div>
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
       <span class="card-label" style="margin:0;">🎓 School Deadlines</span>
-      <button onclick="loadCanvas()" style="background:var(--surface2);border:0.5px solid var(--border);border-radius:8px;padding:4px 10px;font-size:11px;color:var(--text2);cursor:pointer;font-family:'Jost',sans-serif;">↻ Refresh</button>
+      <button onclick="loadCanvas()" style="background:var(--surface2);border:0.5px solid var(--border);border-radius:8px;padding:4px 10px;font-size:12px;color:var(--text2);cursor:pointer;font-family:'Jost',sans-serif;">↻ Refresh</button>
     </div>
-    <div id="deadline-status" style="font-size:11px;color:var(--text3);margin-bottom:8px;font-style:italic;"></div>
+    <div id="deadline-status" style="font-size:12px;color:var(--text3);margin-bottom:8px;font-style:italic;"></div>
     <ul class="deadline-list" id="deadline-list"></ul>
   </div>
 
@@ -244,6 +239,7 @@ body::before{
 
 <script>
 const PROXY = 'https://oprahwinfreysmicrophone--ec98b24423a411f185ec42dde27851f2.web.val.run';
+const LINCOLN_ICS = 'https://corsproxy.io/?url=https://calendar.google.com/calendar/ical/167d1734ad8f4444a2ad567125a8e8fd1a5758d1f0ae283497921094781b3e57%40group.calendar.google.com/public/basic.ics';
 
 let SCHEDULE = [];
 function toMins(h,m){return h*60+m;}
@@ -275,14 +271,14 @@ async function loadLincolnSchedule() {
     SCHEDULE = parseLincolnICS(text);
     if (!SCHEDULE.length) {
       document.getElementById('lincoln-now-label').textContent = 'No schedule found';
-      document.getElementById('sched-full').innerHTML = '<div style="font-size:12px;color:var(--text3);font-style:italic;">No events in calendar.</div>';
+      document.getElementById('sched-full').innerHTML = '<div style="font-size:13px;color:var(--text3);font-style:italic;">No events in calendar.</div>';
       return;
     }
     updateClock();
   } catch(e) {
     console.error('Lincoln error:', e);
     document.getElementById('lincoln-now-label').textContent = 'Calendar unavailable';
-    document.getElementById('sched-full').innerHTML = '<div style="font-size:12px;color:var(--text3);font-style:italic;">Could not load schedule.</div>';
+    document.getElementById('sched-full').innerHTML = '<div style="font-size:13px;color:var(--text3);font-style:italic;">Could not load schedule.</div>';
   }
 }
 
@@ -361,12 +357,12 @@ function renderCal(){
   document.getElementById('cal-month-label').textContent=MONTHS[calMonth]+' '+calYear;
   const first=new Date(calYear,calMonth,1).getDay(),days=new Date(calYear,calMonth+1,0).getDate(),prev=new Date(calYear,calMonth,0).getDate();
   let html='';
-  for(let i=0;i<first;i++)html+=`<div style="font-size:11px;text-align:center;padding:4px 2px;color:var(--text3);opacity:0.4;">${prev-first+i+1}</div>`;
+  for(let i=0;i<first;i++)html+=`<div style="font-size:12px;text-align:center;padding:4px 2px;color:var(--text3);opacity:0.4;">${prev-first+i+1}</div>`;
   for(let d=1;d<=days;d++){
     const isToday=d===now.getDate()&&calMonth===now.getMonth()&&calYear===now.getFullYear();
-    html+=isToday?`<div style="font-size:11px;text-align:center;background:var(--accent);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;margin:0 auto;font-weight:700;">${d}</div>`:`<div style="font-size:11px;text-align:center;padding:4px 2px;color:var(--text2);border-radius:6px;">${d}</div>`;
+    html+=isToday?`<div style="font-size:12px;text-align:center;background:var(--accent);color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;margin:0 auto;font-weight:700;">${d}</div>`:`<div style="font-size:12px;text-align:center;padding:4px 2px;color:var(--text2);border-radius:6px;">${d}</div>`;
   }
-  for(let i=1;i<=42-first-days;i++)html+=`<div style="font-size:11px;text-align:center;padding:4px 2px;color:var(--text3);opacity:0.4;">${i}</div>`;
+  for(let i=1;i<=42-first-days;i++)html+=`<div style="font-size:12px;text-align:center;padding:4px 2px;color:var(--text3);opacity:0.4;">${i}</div>`;
   document.getElementById('cal-grid').innerHTML=html;
 }
 function calPrev(){calMonth--;if(calMonth<0){calMonth=11;calYear--;}renderCal();}
