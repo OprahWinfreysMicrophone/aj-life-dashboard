@@ -32,7 +32,6 @@ body::before{
 }
 .app{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:2rem 1.5rem;}
 
-/* HEADER */
 .header{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:start;margin-bottom:2rem;}
 .time-display{font-family:'Playfair Display',serif;font-size:clamp(52px,8vw,88px);line-height:1;color:var(--text);letter-spacing:-2px;margin-bottom:0.25rem;}
 .time-display span{color:var(--accent);}
@@ -43,11 +42,9 @@ body::before{
 .weather-desc{font-size:12px;color:var(--text2);margin-top:4px;letter-spacing:0.05em;text-transform:uppercase;}
 .weather-loc{font-size:11px;color:var(--text3);margin-top:2px;}
 
-/* GRIDS */
 .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
 
-/* CARDS */
 .card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rlg);padding:1.25rem;position:relative;overflow:hidden;}
 .card-label{font-size:10px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;}
 .card-accent-line{position:absolute;top:0;left:0;right:0;height:2px;}
@@ -55,7 +52,6 @@ body::before{
 .line-green{background:linear-gradient(90deg,var(--accent2),transparent);}
 .line-gold{background:linear-gradient(90deg,var(--gold),transparent);}
 
-/* LINCOLN */
 .lincoln-now{font-family:'Playfair Display',serif;font-size:22px;color:var(--accent);margin-bottom:4px;line-height:1.3;}
 .lincoln-next{font-size:13px;color:var(--text3);}
 .lincoln-time{font-size:11px;color:var(--text2);margin-bottom:6px;}
@@ -65,7 +61,6 @@ body::before{
 .sched-pill.current{background:var(--accent);color:#fff;border-color:var(--accent);}
 .sched-pill.done{opacity:0.35;}
 
-/* QUICK LINKS */
 .links-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 .link-btn{display:flex;align-items:center;gap:10px;background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--r);padding:10px 12px;cursor:pointer;text-decoration:none;color:var(--text);transition:all 0.15s;font-family:'Jost',sans-serif;font-size:13px;}
 .link-btn:hover{border-color:var(--border2);background:var(--surface3);transform:translateY(-1px);}
@@ -73,7 +68,6 @@ body::before{
 .link-label{font-size:13px;color:var(--text);}
 .link-sub{font-size:10px;color:var(--text3);margin-top:1px;}
 
-/* TODO */
 .todo-input-row{display:flex;gap:8px;margin-bottom:12px;}
 .todo-input-row input{flex:1;background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--r);padding:8px 12px;font-size:13px;font-family:'Jost',sans-serif;color:var(--text);outline:none;}
 .todo-input-row input:focus{border-color:var(--accent);}
@@ -90,13 +84,11 @@ body::before{
 .todo-del:hover{color:var(--accent);}
 .todo-empty{font-size:13px;color:var(--text3);padding:8px 0;font-style:italic;}
 
-/* NOTES */
 .notes-area{width:100%;background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--r);padding:10px 12px;font-size:13px;font-family:'Jost',sans-serif;color:var(--text);outline:none;resize:none;min-height:110px;line-height:1.7;}
 .notes-area:focus{border-color:var(--accent);}
 .notes-area::placeholder{color:var(--text3);}
 .notes-saved{font-size:11px;color:var(--text3);margin-top:6px;text-align:right;min-height:16px;}
 
-/* LINCOLN FULL SCHEDULE */
 .sched-full{max-height:280px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--surface3) transparent;}
 .sched-row{display:grid;grid-template-columns:80px 1fr;gap:0;border-bottom:0.5px solid var(--border);}
 .sched-row:last-child{border:none;}
@@ -108,11 +100,9 @@ body::before{
 .sched-row.now .sched-l{color:var(--accent);font-weight:500;}
 .sched-row.past .sched-l,.sched-row.past .sched-t{opacity:0.35;}
 
-/* FOCUS */
 .focus-input{width:100%;background:transparent;border:none;border-bottom:0.5px solid var(--border2);padding:6px 0;font-family:'Playfair Display',serif;font-size:22px;color:var(--gold);text-align:center;outline:none;margin-top:8px;}
 .focus-input::placeholder{color:var(--text3);font-style:italic;}
 
-/* DEADLINES */
 .deadline-list{list-style:none;max-height:220px;overflow-y:auto;}
 .deadline-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:0.5px solid var(--border);font-size:13px;}
 .deadline-item:last-child{border:none;}
@@ -123,49 +113,6 @@ body::before{
 .deadline-due.soon{color:var(--accent);font-weight:500;}
 .deadline-empty{font-size:13px;color:var(--text3);padding:8px 0;font-style:italic;}
 
-/* HABIT TRACKER */
-.habit-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:0.5px solid var(--border);}
-.habit-row:last-child{border:none;}
-.habit-name{flex:1;font-size:13px;color:var(--text);}
-.habit-dots{display:flex;gap:5px;}
-.habit-dot{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border2);cursor:pointer;transition:all 0.15s;flex-shrink:0;}
-.habit-dot.checked{background:var(--accent2);border-color:var(--accent2);}
-.habit-add-row{display:flex;gap:8px;margin-top:10px;}
-.habit-add-row input{flex:1;background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--r);padding:7px 10px;font-size:12px;font-family:'Jost',sans-serif;color:var(--text);outline:none;}
-.habit-add-row input:focus{border-color:var(--accent2);}
-.habit-add-row input::placeholder{color:var(--text3);}
-.habit-add-btn{background:var(--accent2);border:none;border-radius:var(--r);padding:7px 12px;color:#fff;font-size:13px;cursor:pointer;}
-.habit-add-btn:hover{opacity:0.85;}
-.habit-del{background:none;border:none;color:var(--text3);cursor:pointer;font-size:15px;line-height:1;}
-.habit-del:hover{color:#c0392b;}
-.habit-day-labels{display:flex;gap:5px;justify-content:flex-end;margin-bottom:4px;}
-.habit-day-label{width:18px;font-size:9px;color:var(--text3);text-align:center;}
-
-/* MOOD */
-.mood-row{display:flex;gap:8px;justify-content:center;margin:8px 0;}
-.mood-btn{background:var(--surface2);border:1.5px solid var(--border);border-radius:50%;width:40px;height:40px;font-size:20px;cursor:pointer;transition:all 0.15s;display:flex;align-items:center;justify-content:center;}
-.mood-btn:hover{transform:scale(1.15);}
-.mood-btn.selected{border-color:var(--accent);background:rgba(192,122,58,0.1);transform:scale(1.15);}
-.mood-log{max-height:100px;overflow-y:auto;margin-top:8px;}
-.mood-entry{font-size:11px;color:var(--text3);padding:3px 0;border-bottom:0.5px solid var(--border);display:flex;gap:8px;}
-.mood-entry:last-child{border:none;}
-.mood-note-input{width:100%;background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--r);padding:6px 10px;font-size:12px;font-family:'Jost',sans-serif;color:var(--text);outline:none;margin-top:8px;}
-.mood-note-input:focus{border-color:var(--accent);}
-.mood-note-input::placeholder{color:var(--text3);}
-
-/* POMODORO */
-.pomo-display{font-family:'Playfair Display',serif;font-size:48px;color:var(--text);text-align:center;letter-spacing:-1px;margin:8px 0 4px;}
-.pomo-label{font-size:11px;color:var(--text3);text-align:center;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;}
-.pomo-controls{display:flex;gap:8px;justify-content:center;}
-.pomo-btn{background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--r);padding:8px 16px;font-size:13px;cursor:pointer;font-family:'Jost',sans-serif;color:var(--text);transition:all 0.15s;}
-.pomo-btn:hover{background:var(--surface3);}
-.pomo-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent);}
-.pomo-btn.primary:hover{opacity:0.85;}
-.pomo-progress{height:3px;background:var(--surface2);border-radius:2px;margin:12px 0 8px;overflow:hidden;}
-.pomo-progress-bar{height:100%;background:var(--accent);border-radius:2px;transition:width 1s linear;}
-.pomo-count{font-size:11px;color:var(--text3);text-align:center;}
-
-/* RESPONSIVE */
 @media(max-width:900px){.grid{grid-template-columns:1fr 1fr;}}
 @media(max-width:600px){
   .header{grid-template-columns:1fr;gap:1rem;}
@@ -205,7 +152,7 @@ body::before{
       <div class="card-accent-line line-orange"></div>
       <div class="card-label">Lincoln is...</div>
       <div class="lincoln-time" id="lincoln-time-display"></div>
-      <div class="lincoln-now" id="lincoln-now-label">—</div>
+      <div class="lincoln-now" id="lincoln-now-label">Loading...</div>
       <div class="lincoln-next" id="lincoln-next-label"></div>
       <div style="margin-top:12px;"><div class="sched-strip" id="sched-strip"></div></div>
     </div>
@@ -223,53 +170,7 @@ body::before{
     </div>
   </div>
 
-  <!-- ROW 2: Pomodoro + Mood + Habits -->
-  <div class="grid">
-    <!-- POMODORO -->
-    <div class="card">
-      <div class="card-accent-line line-orange"></div>
-      <div class="card-label">⏱ Focus Timer</div>
-      <div class="pomo-display" id="pomo-display">25:00</div>
-      <div class="pomo-label" id="pomo-label">Work session</div>
-      <div class="pomo-progress"><div class="pomo-progress-bar" id="pomo-bar" style="width:100%"></div></div>
-      <div class="pomo-count" id="pomo-count">Session 1 of 4</div>
-      <div class="pomo-controls" style="margin-top:10px;">
-        <button class="pomo-btn" onclick="pomoPrev()">‹</button>
-        <button class="pomo-btn primary" id="pomo-start-btn" onclick="pomoToggle()">Start</button>
-        <button class="pomo-btn" onclick="pomoReset()">Reset</button>
-        <button class="pomo-btn" onclick="pomoNext()">›</button>
-      </div>
-    </div>
-
-    <!-- MOOD -->
-    <div class="card">
-      <div class="card-accent-line line-gold"></div>
-      <div class="card-label">Mood check-in</div>
-      <div class="mood-row">
-        <button class="mood-btn" onclick="logMood('😤','Frustrated')" title="Frustrated">😤</button>
-        <button class="mood-btn" onclick="logMood('😔','Low')" title="Low">😔</button>
-        <button class="mood-btn" onclick="logMood('😐','Meh')" title="Meh">😐</button>
-        <button class="mood-btn" onclick="logMood('🙂','Okay')" title="Okay">🙂</button>
-        <button class="mood-btn" onclick="logMood('😄','Good')" title="Good">😄</button>
-      </div>
-      <input class="mood-note-input" id="mood-note" placeholder="Optional note..." maxlength="80"/>
-      <div class="mood-log" id="mood-log"></div>
-    </div>
-
-    <!-- HABITS -->
-    <div class="card">
-      <div class="card-accent-line line-green"></div>
-      <div class="card-label">Habits</div>
-      <div class="habit-day-labels" id="habit-day-labels"></div>
-      <div id="habit-list"></div>
-      <div class="habit-add-row">
-        <input type="text" id="habit-input" placeholder="Add habit..." onkeydown="if(event.key==='Enter')addHabit()"/>
-        <button class="habit-add-btn" onclick="addHabit()">+</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ROW 3: Email + Mini Calendar -->
+  <!-- ROW 2: Email + Mini Calendar -->
   <div class="grid2">
     <div class="card">
       <div class="card-accent-line line-orange"></div>
@@ -304,7 +205,7 @@ body::before{
     </div>
   </div>
 
-  <!-- ROW 4: To-do + Notes + Lincoln Schedule -->
+  <!-- ROW 3: To-do + Notes + Lincoln Schedule -->
   <div class="grid">
     <div class="card">
       <div class="card-accent-line line-orange"></div>
@@ -324,7 +225,7 @@ body::before{
     <div class="card">
       <div class="card-accent-line line-gold"></div>
       <div class="card-label">Lincoln's full day</div>
-      <div class="sched-full" id="sched-full"></div>
+      <div class="sched-full" id="sched-full"><div style="font-size:12px;color:var(--text3);font-style:italic;">Loading schedule...</div></div>
     </div>
   </div>
 
@@ -342,9 +243,11 @@ body::before{
 </div>
 
 <script>
-// ── LINCOLN SCHEDULE ──────────────────────────────────────────
+const PROXY = 'https://oprahwinfreysmicrophone--ec98b24423a411f185ec42dde27851f2.web.val.run';
+
 let SCHEDULE = [];
 function toMins(h,m){return h*60+m;}
+
 function parseLincolnICS(text) {
   text = text.replace(/\r\n[ \t]/g,'').replace(/\r\n/g,'\n').replace(/\r/g,'\n');
   const events = [];
@@ -363,13 +266,26 @@ function parseLincolnICS(text) {
   events.sort((a,b) => toMins(a.h,a.m) - toMins(b.h,b.m));
   return events;
 }
+
 async function loadLincolnSchedule() {
   try {
-    const res = await fetch('https://oprahwinfreysmicrophone-ec98b24423a411f185ecf2dde27853f2.web.val.run?feed=lincoln',{cache:'no-cache'});
-    SCHEDULE = parseLincolnICS(await res.text());
+    const res = await fetch(PROXY + '?feed=lincoln', {cache:'no-cache'});
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const text = await res.text();
+    SCHEDULE = parseLincolnICS(text);
+    if (!SCHEDULE.length) {
+      document.getElementById('lincoln-now-label').textContent = 'No schedule found';
+      document.getElementById('sched-full').innerHTML = '<div style="font-size:12px;color:var(--text3);font-style:italic;">No events in calendar.</div>';
+      return;
+    }
     updateClock();
-  } catch(e) { console.error('Lincoln calendar error:',e); }
+  } catch(e) {
+    console.error('Lincoln error:', e);
+    document.getElementById('lincoln-now-label').textContent = 'Calendar unavailable';
+    document.getElementById('sched-full').innerHTML = '<div style="font-size:12px;color:var(--text3);font-style:italic;">Could not load schedule.</div>';
+  }
 }
+
 function getCurrentBlock(mins){
   for(let i=0;i<SCHEDULE.length;i++){
     const sm=toMins(SCHEDULE[i].h,SCHEDULE[i].m);
@@ -379,7 +295,6 @@ function getCurrentBlock(mins){
   return -1;
 }
 
-// ── CLOCK ─────────────────────────────────────────────────────
 function updateClock(){
   const now=new Date(), h=now.getHours(), min=now.getMinutes();
   const h12=h%12||12, ampm=h<12?'AM':'PM';
@@ -387,6 +302,7 @@ function updateClock(){
   document.getElementById('time-m').textContent=String(min).padStart(2,'0')+' '+ampm;
   document.getElementById('date-display').textContent=now.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
   document.getElementById('greeting-text').textContent=(h>=17?'Good evening':h>=12?'Good afternoon':'Good morning')+', Alaina.';
+  if(!SCHEDULE.length) return;
   const mins=h*60+min, ci=getCurrentBlock(mins);
   const cur=ci>=0?SCHEDULE[ci]:null, nxt=ci>=0&&ci+1<SCHEDULE.length?SCHEDULE[ci+1]:null;
   document.getElementById('lincoln-time-display').textContent=cur?cur.time:'';
@@ -394,8 +310,8 @@ function updateClock(){
   document.getElementById('lincoln-next-label').textContent=nxt?'Next: '+nxt.time+' — '+nxt.label:'';
   const start=Math.max(0,ci-1);
   document.getElementById('sched-strip').innerHTML=SCHEDULE.slice(start,start+7).map((s,idx)=>{
-    const si=start+idx, isCur=si===ci, isPast=si<ci;
-    return `<div class="sched-pill ${isCur?'current':''} ${isPast?'done':''}">${s.time.replace(':00','')}</div>`;
+    const si=start+idx;
+    return `<div class="sched-pill ${si===ci?'current':''} ${si<ci?'done':''}">${s.time.replace(':00','')}</div>`;
   }).join('');
   document.getElementById('sched-full').innerHTML=SCHEDULE.map((s,i)=>`
     <div class="sched-row ${i===ci?'now':''} ${i<ci?'past':''}">
@@ -403,10 +319,11 @@ function updateClock(){
       <div class="sched-l">${s.label}</div>
     </div>`).join('');
 }
-setInterval(updateClock,1000); updateClock(); loadLincolnSchedule();
+setInterval(updateClock,1000);
+updateClock();
+loadLincolnSchedule();
 setInterval(loadLincolnSchedule,60*60*1000);
 
-// ── WEATHER ───────────────────────────────────────────────────
 async function loadWeather(){
   try{
     const res=await fetch('https://api.open-meteo.com/v1/forecast?latitude=38.6559&longitude=-87.1742&current_weather=true&temperature_unit=fahrenheit');
@@ -418,7 +335,6 @@ async function loadWeather(){
 }
 loadWeather(); setInterval(loadWeather,10*60*1000);
 
-// ── TO-DO ─────────────────────────────────────────────────────
 let todos=JSON.parse(localStorage.getItem('dash_todos')||'[]');
 const todayStr=new Date().toDateString();
 if(localStorage.getItem('dash_todo_date')!==todayStr){todos=[];localStorage.setItem('dash_todos','[]');localStorage.setItem('dash_todo_date',todayStr);}
@@ -433,13 +349,11 @@ function renderTodos(){
 }
 renderTodos();
 
-// ── NOTES ─────────────────────────────────────────────────────
 const notesArea=document.getElementById('notes-area');
 notesArea.value=localStorage.getItem('dash_notes')||'';
 let noteTimer;
 function saveNotes(){clearTimeout(noteTimer);noteTimer=setTimeout(()=>{localStorage.setItem('dash_notes',notesArea.value);document.getElementById('notes-saved').textContent='Saved.';setTimeout(()=>document.getElementById('notes-saved').textContent='',2000);},800);}
 
-// ── CALENDAR ──────────────────────────────────────────────────
 let calYear=new Date().getFullYear(),calMonth=new Date().getMonth();
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 function renderCal(){
@@ -450,7 +364,7 @@ function renderCal(){
   for(let i=0;i<first;i++)html+=`<div style="font-size:11px;text-align:center;padding:4px 2px;color:var(--text3);opacity:0.4;">${prev-first+i+1}</div>`;
   for(let d=1;d<=days;d++){
     const isToday=d===now.getDate()&&calMonth===now.getMonth()&&calYear===now.getFullYear();
-    html+=isToday?`<div style="font-size:11px;text-align:center;padding:4px 2px;background:var(--accent);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;margin:0 auto;font-weight:700;">${d}</div>`:`<div style="font-size:11px;text-align:center;padding:4px 2px;color:var(--text2);border-radius:6px;">${d}</div>`;
+    html+=isToday?`<div style="font-size:11px;text-align:center;background:var(--accent);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;margin:0 auto;font-weight:700;">${d}</div>`:`<div style="font-size:11px;text-align:center;padding:4px 2px;color:var(--text2);border-radius:6px;">${d}</div>`;
   }
   for(let i=1;i<=42-first-days;i++)html+=`<div style="font-size:11px;text-align:center;padding:4px 2px;color:var(--text3);opacity:0.4;">${i}</div>`;
   document.getElementById('cal-grid').innerHTML=html;
@@ -459,13 +373,11 @@ function calPrev(){calMonth--;if(calMonth<0){calMonth=11;calYear--;}renderCal();
 function calNext(){calMonth++;if(calMonth>11){calMonth=0;calYear++;}renderCal();}
 renderCal();
 
-// ── FOCUS ─────────────────────────────────────────────────────
 const focusInput=document.getElementById('focus-input');
 focusInput.value=localStorage.getItem('dash_focus_'+todayStr)||'';
 let focusTimer;
 function saveFocus(){clearTimeout(focusTimer);focusTimer=setTimeout(()=>{localStorage.setItem('dash_focus_'+todayStr,focusInput.value);document.getElementById('focus-saved').textContent='Saved.';setTimeout(()=>document.getElementById('focus-saved').textContent='',2000);},600);}
 
-// ── CANVAS DEADLINES ──────────────────────────────────────────
 function parseICS(text) {
   text = text.replace(/\r\n[ \t]/g,'').replace(/\r\n/g,'\n').replace(/\r/g,'\n');
   const events=[];
@@ -484,11 +396,13 @@ function parseICS(text) {
   }
   return events;
 }
+
 async function loadCanvas(){
   const status=document.getElementById('deadline-status'),ul=document.getElementById('deadline-list');
   status.textContent='Syncing with Canvas...';ul.innerHTML='';
   try{
-    const res=await fetch('https://oprahwinfreysmicrophone-ec98b24423a411f185ecf2dde27853f2.web.val.run?feed=canvas',{cache:'no-cache'});
+    const res=await fetch(PROXY+'?feed=canvas',{cache:'no-cache'});
+    if(!res.ok) throw new Error('HTTP '+res.status);
     const events=parseICS(await res.text());
     const today=new Date();today.setHours(0,0,0,0);
     const upcoming=events.filter(e=>new Date(e.date+'T00:00:00')>=today).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,15);
@@ -500,97 +414,12 @@ async function loadCanvas(){
       return `<li class="deadline-item"><span class="deadline-class">${d.cls}</span><a href="${d.url}" target="_blank" class="deadline-name" style="color:var(--text);text-decoration:none;">${d.name.length>50?d.name.slice(0,50)+'…':d.name}</a><span class="deadline-due ${urgencyClass}">${dueLabel}</span></li>`;
     }).join('');
     status.textContent=`Synced • ${upcoming.length} upcoming`;
-  }catch(e){status.textContent='Sync failed — '+e.message;ul.innerHTML='<div class="deadline-empty">Could not load Canvas deadlines.</div>';}
-}
-loadCanvas();
-
-// ── POMODORO ──────────────────────────────────────────────────
-const POMO_TIMES={work:25*60,short:5*60,long:15*60};
-let pomoMode='work',pomoSeconds=POMO_TIMES.work,pomoRunning=false,pomoInterval=null,pomoSession=1,pomoTotal=4;
-function pomoDisplay(){
-  const m=Math.floor(pomoSeconds/60),s=pomoSeconds%60;
-  document.getElementById('pomo-display').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-  const total=POMO_TIMES[pomoMode];
-  document.getElementById('pomo-bar').style.width=(pomoSeconds/total*100)+'%';
-  document.getElementById('pomo-label').textContent=pomoMode==='work'?'Work session':pomoMode==='short'?'Short break':'Long break';
-  document.getElementById('pomo-count').textContent=`Session ${pomoSession} of ${pomoTotal}`;
-}
-function pomoToggle(){
-  if(pomoRunning){clearInterval(pomoInterval);pomoRunning=false;document.getElementById('pomo-start-btn').textContent='Resume';}
-  else{
-    pomoRunning=true;document.getElementById('pomo-start-btn').textContent='Pause';
-    pomoInterval=setInterval(()=>{
-      if(pomoSeconds>0){pomoSeconds--;pomoDisplay();}
-      else{clearInterval(pomoInterval);pomoRunning=false;document.getElementById('pomo-start-btn').textContent='Start';
-        if(pomoMode==='work'){pomoSession++;if(pomoSession>pomoTotal)pomoSession=1;}
-        pomoMode=pomoMode==='work'?(pomoSession%4===0?'long':'short'):'work';
-        pomoSeconds=POMO_TIMES[pomoMode];pomoDisplay();
-        new Notification&&Notification.permission==='granted'&&new Notification('Timer done!',{body:pomoMode==='work'?'Time to focus!':'Take a break.'});
-      }
-    },1000);
+  }catch(e){
+    status.textContent='Sync failed — '+e.message;
+    ul.innerHTML='<div class="deadline-empty">Could not load Canvas deadlines.</div>';
   }
 }
-function pomoReset(){clearInterval(pomoInterval);pomoRunning=false;pomoSeconds=POMO_TIMES[pomoMode];document.getElementById('pomo-start-btn').textContent='Start';pomoDisplay();}
-function pomoPrev(){clearInterval(pomoInterval);pomoRunning=false;document.getElementById('pomo-start-btn').textContent='Start';const modes=['work','short','long'];let i=modes.indexOf(pomoMode);i=(i-1+modes.length)%modes.length;pomoMode=modes[i];pomoSeconds=POMO_TIMES[pomoMode];pomoDisplay();}
-function pomoNext(){clearInterval(pomoInterval);pomoRunning=false;document.getElementById('pomo-start-btn').textContent='Start';const modes=['work','short','long'];let i=modes.indexOf(pomoMode);i=(i+1)%modes.length;pomoMode=modes[i];pomoSeconds=POMO_TIMES[pomoMode];pomoDisplay();}
-pomoDisplay();
-if('Notification' in window && Notification.permission==='default') Notification.requestPermission();
-
-// ── MOOD ──────────────────────────────────────────────────────
-let moodLog=JSON.parse(localStorage.getItem('dash_mood_'+todayStr)||'[]');
-function logMood(emoji,label){
-  document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('selected'));
-  event.currentTarget.classList.add('selected');
-  const note=document.getElementById('mood-note').value.trim();
-  const now=new Date();
-  const time=now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
-  moodLog.push({emoji,label,note,time});
-  localStorage.setItem('dash_mood_'+todayStr,JSON.stringify(moodLog));
-  document.getElementById('mood-note').value='';
-  renderMoodLog();
-}
-function renderMoodLog(){
-  const el=document.getElementById('mood-log');
-  if(!moodLog.length){el.innerHTML='<div style="font-size:11px;color:var(--text3);font-style:italic;padding:4px 0;">No check-ins yet today.</div>';return;}
-  el.innerHTML=[...moodLog].reverse().map(e=>`<div class="mood-entry"><span>${e.emoji}</span><span style="color:var(--text2);">${e.label}${e.note?' — '+e.note:''}</span><span style="margin-left:auto;">${e.time}</span></div>`).join('');
-}
-renderMoodLog();
-
-// ── HABITS ────────────────────────────────────────────────────
-const HABIT_DAYS=7;
-let habits=JSON.parse(localStorage.getItem('dash_habits')||'[]');
-function getWeekDates(){
-  const dates=[];const now=new Date();
-  for(let i=HABIT_DAYS-1;i>=0;i--){const d=new Date(now);d.setDate(d.getDate()-i);dates.push(d.toDateString());}
-  return dates;
-}
-function getDayLabel(dateStr){const d=new Date(dateStr);return ['Su','Mo','Tu','We','Th','Fr','Sa'][d.getDay()];}
-function saveHabits(){localStorage.setItem('dash_habits',JSON.stringify(habits));}
-function addHabit(){
-  const input=document.getElementById('habit-input'),name=input.value.trim();
-  if(!name)return;
-  habits.push({id:Date.now(),name,checks:{}});
-  saveHabits();input.value='';renderHabits();
-}
-function toggleHabitDay(id,dateStr){
-  const h=habits.find(x=>x.id===id);if(!h)return;
-  h.checks[dateStr]=!h.checks[dateStr];
-  saveHabits();renderHabits();
-}
-function deleteHabit(id){habits=habits.filter(x=>x.id!==id);saveHabits();renderHabits();}
-function renderHabits(){
-  const weekDates=getWeekDates();
-  document.getElementById('habit-day-labels').innerHTML=weekDates.map(d=>`<div class="habit-day-label">${getDayLabel(d)}</div>`).join('');
-  const el=document.getElementById('habit-list');
-  if(!habits.length){el.innerHTML='<div style="font-size:12px;color:var(--text3);font-style:italic;padding:6px 0;">Add habits below.</div>';return;}
-  el.innerHTML=habits.map(h=>`
-    <div class="habit-row">
-      <span class="habit-name">${h.name}</span>
-      <div class="habit-dots">${weekDates.map(d=>`<div class="habit-dot ${h.checks[d]?'checked':''}" onclick="toggleHabitDay(${h.id},'${d}')" title="${d}"></div>`).join('')}</div>
-      <button class="habit-del" onclick="deleteHabit(${h.id})">×</button>
-    </div>`).join('');
-}
-renderHabits();
+loadCanvas();
 </script>
 </body>
 </html>
